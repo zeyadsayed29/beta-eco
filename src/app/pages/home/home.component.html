@@ -1,0 +1,66 @@
+<!-- <section>
+  <div class="grid md:grid-cols-[minmax(1,1fr)_30%]" >
+
+    <div>
+      <img src="/images/banner-4.jpeg" class="w-full" alt="">
+    </div>
+
+    <div>
+      <img src="/images/American-Express-Color.png" class="w-full" alt="">
+      <img src="/images/American-Express-Color.png" class="w-full" alt="">
+    </div>
+  </div>
+</section> -->
+<section>
+  <h2 class="text-4xl">popular product</h2>
+  <input type="search" placeholder="search by name" class="w-50 mx-auto">
+  <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
+    @for (prod of product.slice(0,12); track prod._id) {
+    <div
+      class="card border-green-400/50 rounded-md overflow-hidden shadow relative"
+    >
+      <div class="card-img" [routerLink]="['/details' , prod._id ]">
+        <img
+          [src]="prod.imageCover"
+          class="w-full"
+          [alt]="prod.title | termText"
+        />
+      </div>
+      <div class="card-body px-2 py-4">
+        <h4 class="text-green-500 text-xs">{{ prod.category.name | sale}}</h4>
+        <h3 class="font-medium">{{ prod.title }}</h3>
+        <div class="flex justify-between items-center">
+          <span>{{ prod.price }}</span>
+          <button (click)="addProductToWishlist(prod._id)"><i><i class="fa-solid fa-heart"></i></i></button>
+          <div class="flex items-center">
+            <i class="fas fa-star text-yellow-300"></i>
+            <span class="text-gray-500">{{ prod.ratingsAverage }}</span>
+          </div>
+        </div>
+      </div>
+      <button
+        class="bg-green-600 text-white py-2 px-10 border rounded-sm block w-[90%] mx-auto" (click)="addToCart(prod._id)"
+      >
+        add to cart
+      </button>
+    </div>
+    }
+  </div>
+</section>
+
+<section class="">
+  <h2>popular categoirey</h2>
+  <div>Some tags before</div>
+  <owl-carousel-o [options]="customOptions">
+    @for(cat of categories ; track cat._id){
+    <ng-template carouselSlide>
+      <!-- content -->
+      <div routerLink="/details">
+        <img [src]="cat.image" class="w-full h-[240px]" alt="" />
+        <h3 class="text-green-400">{{ cat.name }}</h3>
+      </div>
+    </ng-template>
+    }
+  </owl-carousel-o>
+  <div>Some tags after</div>
+</section>

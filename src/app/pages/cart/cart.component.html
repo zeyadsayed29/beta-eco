@@ -1,0 +1,39 @@
+<section class="bg-50 , rounded border shadow p-4 w-[75%] mx-auto">
+    <h1 class="text-green-600 text-center ">show Cart</h1>
+    <span class="text-green-900 " >Total Cart Price : {{cartDetails.totalCartPrice}}</span>
+
+@for (prod of cartDetails.products; track prod.product.id) {
+    <div class="grid md:grid-cols-[10%_minmax(0,1fr)] border-b mb-3">
+
+
+        <!-- img -->
+                <div>
+                    <img [src]="prod.product.imageCover" [alt]="prod.product.title" class="w-full h-[100px]">
+                </div>
+        
+                <!-- info -->
+                <div class="flex justify-between items-center">
+                    <!-- info -->
+                    <div>
+                        <h1>{{prod.product.title}}</h1>
+                        <h4>price : {{prod.price}}</h4>
+                        <button (click)="deleteProduct(prod.product.id)">
+                            <i class="fa-solid fa-trash-can"></i> delete
+                          </button>
+                    </div>
+                    <!-- ------------------ -->
+        
+        
+                    <!-- buttons -->
+                    <div class="flex items-center gap-5">
+                        <button class="text-green-600 text-3xl" (click)="updateItem(prod.product.id , prod.count + 1)"><i class="fa-regular fa-square-plus"></i></button>
+                        <span>{{prod.count}}</span>
+                        <button class="text-green-600 text-3xl" (click)="updateItem(prod.product.id , prod.count - 1)"><i class="fa-regular fa-square-minus"></i></button>
+                    </div>
+        
+                </div>
+            </div>
+}
+
+<button class="btn-main" [routerLink]="['/checkout' , cartDetails._id]">CheckOut</button>
+</section>
